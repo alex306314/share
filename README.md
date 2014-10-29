@@ -66,9 +66,91 @@
 
 最后打开NC客户端测试一下是否正常运行。
 
+
 ##部署环境（打补丁）
 
+打补丁一般要BUS把代码提交到服务器之后才执行，或者有时候需要重新部署的时候执行，基本流程为下面三个步骤。
 
+ 1. 更新代码（如果只是重新部署就不需要做这一步）
+ 2. 部署代码
+ 3. 重启环境
+
+###更新代码（如果只是重新部署就不需要做这一步）
+
+登陆到你需要部署的服务器（A版或B版），然后输入下面代码并按回车就可以更新代码了。
+
+`cd /data/nchome/modules/ && git pull`
+
+![cat_version](update_code.jpg)
+
+如果有其他输出就是有代码更新了，但是我们不需要管它。
+
+###部署代码
+
+输入下面命令，会跳出一个新的窗口，如果是双屏电脑还会让你选在那个屏幕跳出窗口，直接按确定就行了。
+
+`/data/nchome/bin/wasSysConfig.sh`
+
+双屏选择框
+
+![cat_version](two_screen.png)
+
+运行之后显示的界面，按图片里的说明点击进入部署模块，记住要耐心等待！
+
+![cat_version](enter_deploy.png)
+
+进入到部署模块界面，按下图说明进行操作。
+
+![cat_version](deploy.png)
+
+部署时间比较长，一定要耐心等待，中途中断容易出问题！
+
+![cat_version](deploying.png)
+
+等到看到下图就说明部署完成了。
+
+![cat_version](deploy_finsh.png)
+
+###重启环境
+
+输入下面命令并回车就可以重启环境了。
+
+```sh
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/stopServer.sh ncMem04
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/stopServer.sh ncMem03
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/stopServer.sh ncMem02
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/stopServer.sh ncMem01
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/stopServer.sh master
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/stopNode.sh
+/opt/IBM/WebSphere/AppServer/profiles/NcManager/bin/stopManager.sh
+/opt/IBM/WebSphere/AppServer/profiles/NcManager/bin/startManager.sh
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startNode.sh
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh master
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem01
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem02
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem03
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem04
+```
+
+如果命令执行正常就会显示下面图片的输出内容，如果重启失败请参考后面的解决方法。
+
+![cat_version](reboo_was1.png)
+![cat_version](reboo_was2.png)
+![cat_version](reboo_was3.png)
+
+如果命令执行失败或者卡住不动，那么可以直接点击工具的 `断开连接`  按钮，再点击 `重新连接` 按钮，之后输入 `reboot` 命令重启虚拟机，这时会自动断开连接，等待1分钟左右，点击 `重新连接` 按钮连进服务器，如果重新连接不成功则等一会儿再试，直到连进服务器为止，然后执行下面命令启动Was环境。
+
+```sh
+/opt/IBM/WebSphere/AppServer/profiles/NcManager/bin/startManager.sh
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startNode.sh
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh master
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem01
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem02
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem03
+/opt/IBM/WebSphere/AppServer/profiles/NcMaster/bin/startServer.sh ncMem04
+```
+
+到这里环境部署完成了，可以通过 `http://服务器IP:9080` 进行测试访问。
 
 ##补丁回滚
 
