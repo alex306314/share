@@ -7,7 +7,7 @@
 
 ##环境和工具
 
-部署Was所需工具是Xmanager Enterprise 4，下载和密钥链接：<a href="xmanager.zip">点击下载</a>
+部署Was所需工具是Xmanager Enterprise 4，下载和密钥链接：<a href="xmanager.zip?raw=true">点击下载</a>
 
 ###安装工具
 
