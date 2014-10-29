@@ -140,7 +140,7 @@
 
 如果命令执行失败或者卡住不动，那么可以直接点击工具的 `断开连接`  按钮，再点击 `重新连接` 按钮，之后输入 `reboot` 命令重启虚拟机，这时会自动断开连接，等待1分钟左右，点击 `重新连接` 按钮连进服务器，如果重新连接不成功则等一会儿再试，直到连进服务器为止，然后执行下面命令启动Was环境。
 
-![cat_version](reboo.png)
+![cat_version](reboot.png)
 
 ```sh
 /opt/IBM/WebSphere/AppServer/profiles/NcManager/bin/startManager.sh
