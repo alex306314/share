@@ -7,7 +7,7 @@
 
 ##环境和工具
 
-部署Was所需工具是Xmanager Enterprise 4，下载和密钥链接：<a href="xmanager.zip?raw=true">点击下载</a>
+部署Was所需工具是Xmanager Enterprise 4，安装文件和密钥链接：<a href="xmanager.zip?raw=true">点击下载</a>
 
 ###安装工具
 
@@ -28,6 +28,9 @@
 ![xshell](new_xshell.png)
 ![xshell](new_xshell2.png)
 ![xshell](new_xshell3.png)
+
+重复上面的步骤创建下面两个连接
+
 ![xshell](new_xshell4.png)
 ![xshell](new_xshell5.png)
 ![xshell](open_xshell.png)
